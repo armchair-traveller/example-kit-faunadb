@@ -12,5 +12,8 @@
     "svelte": "^3.29.0",
     "vite": "^2.1.0"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "magic-sdk": "^4.2.1"
+  }
 }

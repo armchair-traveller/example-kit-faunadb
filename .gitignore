@@ -2,7 +2,7 @@
 node_modules
 /.svelte
 /build
-.env
+.env.local
 .vscode
 /functions/render
 

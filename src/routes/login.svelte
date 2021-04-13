@@ -12,13 +12,13 @@
   });
 
   const login = async (email) => {
-    if (isMounted && errorMsg) errorMsg = undefined;
+    errorMsg &&= undefined;
 
     try {
-      const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY);
+      const magic = new Magic(import.meta.env.VITE_MAGIC_PUBLISHABLE_KEY);
       const didToken = await magic.auth.loginWithMagicLink({ email });
 
-      const res = await fetch("/api/login", {
+      const res = await fetch("/.netlify/functions/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,14 +27,11 @@
         body: JSON.stringify({ email }),
       });
 
-      if (res.status === 200) {
-        goto("/");
-      } else {
-        throw new Error(await res.text());
-      }
+      if (res.status === 200) goto("/");
+      else throw new Error(await res.text());
     } catch (err) {
       console.error("An unexpected error occurred:", err);
-      if (isMounted) errorMsg = err.message;
+      errorMsg = err.message;
     }
   };
 

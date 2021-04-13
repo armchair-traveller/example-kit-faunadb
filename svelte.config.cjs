@@ -1,13 +1,13 @@
-const static = require("@sveltejs/adapter-static");
+const netlify = require("@sveltejs/adapter-netlify");
 const pkg = require("./package.json");
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
   kit: {
-    // By default, `npm run build` will create a standard static app.
+    // By default, `npm run build` will create a standard netlify app.
     // You can create optimized builds for different platforms by
     // specifying a different adapter
-    adapter: static(),
+    adapter: netlify(),
 
     // hydrate the <div id="svelte"> element in src/app.html
     target: "#svelte",
